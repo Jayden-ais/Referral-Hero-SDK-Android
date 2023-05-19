@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.sdk.rh.RH;
-
 import com.sdk.rh.networking.ApiResponse;
+
 
 public class MainActivity extends AppCompatActivity implements RH.RHReferralCallBackListener {
 
@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity implements RH.RHReferralCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         RH.getAutoInstance(this);
-
 
         // To add a subscriber manually  simply call method below function and
         // send the user information such as email address and name.
