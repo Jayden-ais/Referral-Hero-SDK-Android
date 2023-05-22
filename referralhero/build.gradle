@@ -1,12 +1,12 @@
 plugins {
     id 'com.android.library'
     id 'maven-publish'
-    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
 }
 
 
 def getVersionName = { ->
-    return "0.0.11" // Replace with version Name
+    return "0.0.12" // Replace with version Name
 }
 
 def getArtificatId = { ->
@@ -21,7 +21,7 @@ android {
     defaultConfig {
         minSdk = 19
         targetSdk = 33
-        versionCode = 5
+        versionCode = 1
         versionName = getVersionName()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -56,7 +56,9 @@ android {
         jvmTarget = '1.8'
     }
 }
-
+repositories {
+    mavenCentral()
+}
 dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
