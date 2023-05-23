@@ -23,6 +23,8 @@ class PrefHelper(context: Context) {
      */
     private var prefsEditor_: SharedPreferences.Editor?
 
+    var mContext: Context?
+
     /**
      *
      * Constructor with context passed from calling [android.app.Activity].
@@ -33,6 +35,7 @@ class PrefHelper(context: Context) {
     init {
         appSharedPrefs_ = context.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
         prefsEditor_ = appSharedPrefs_.edit()
+        mContext = context
     }
 
     /**
@@ -57,8 +60,6 @@ class PrefHelper(context: Context) {
         return false
     }
 
-    val rhAccessTokenKey: String?
-        get() = getString(KEY_RH_ACCESS_TOKEN)
 
     /**
      * Set the given Referral API Key  to preference. Clears the preference data if the key is a new key.
@@ -95,6 +96,10 @@ class PrefHelper(context: Context) {
         set(rhReferralLink) {
             setString(KEY_RH_LINK, rhReferralLink)
         }
+
+    val rhAccessTokenKey: String?
+        get() = getString(KEY_RH_ACCESS_TOKEN)
+
 
     /**
      * Set the given Subscriber ID  to preference.
@@ -448,6 +453,7 @@ class PrefHelper(context: Context) {
         }
 
         val aPIBaseUrl: String
-            get() = "https://app.referralhero.com/api/v2/lists/"
+            get() = "https://dev.referralhero.com/api/sdk/v1/lists/"
+
     }
 }
