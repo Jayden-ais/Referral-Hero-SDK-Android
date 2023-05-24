@@ -7,9 +7,11 @@ import com.sdk.rh.PrefHelper
 import com.sdk.rh.RHUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 class ReferralNetworkClient {
@@ -26,15 +28,11 @@ class ReferralNetworkClient {
     - Handled the response based on the HTTP status code, returning the parsed response if code is 200, otherwise returning a new `ApiResponse` object with the error details.
      * */
     suspend fun <T> serverRequestGetAsync(
-        context: Context, endpoint: String, queryParams: HashMap<String, String?>
+        context: Context, endpoint: String
     ): ApiResponse {
 
         val urlBuilder = (PrefHelper.aPIBaseUrl + endpoint).toHttpUrlOrNull()?.newBuilder()
-        /*queryParams?.let {
-            for ((key, value) in it) {
-                key?.let { urlBuilder?.addQueryParameter(it, value) }
-            }
-        }*/
+
         val url = urlBuilder?.build()?.toString()
 
         Log.e("URL", url.toString())
@@ -78,6 +76,7 @@ class ReferralNetworkClient {
             Request.Builder().url(url!!).addHeader("Authorization", RHUtil.readRhKey(context))
                 .addHeader("Accept", "application/vnd.referralhero.v1").post(requestBody)
 
+        Log.e("URL", url)
         val request = requestBuilder.build()
         return withContext(Dispatchers.IO) {
             val response = client.newCall(request).execute()
@@ -102,18 +101,12 @@ class ReferralNetworkClient {
     - Handled the response based on the HTTP status code, returning the parsed response if code is 200, otherwise returning a new `ApiResponse` object with the error details.
      * ***/
     suspend fun <T> serverRequestDeleteAsync(
-        context: Context, endpoint: String, queryParams: HashMap<String, String?>
+        context: Context, endpoint: String
     ): ApiResponse {
 
         val urlBuilder = (PrefHelper.aPIBaseUrl + endpoint).toHttpUrlOrNull()?.newBuilder()
-        /*queryParams?.let {
-            for ((key, value) in it) {
-                key?.let { urlBuilder?.addQueryParameter(it, value) }
-            }
-        }*/
         val url = urlBuilder?.build()?.toString()
 
-        Log.e("URL", url.toString())
         val requestBuilder =
             Request.Builder().url(url!!).addHeader("Authorization", RHUtil.readRhKey(context))
                 .addHeader("Accept", "application/vnd.referralhero.v1")
