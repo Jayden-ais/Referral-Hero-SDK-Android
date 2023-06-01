@@ -79,14 +79,14 @@ public class MainActivity extends AppCompatActivity implements RH.RHReferralCall
                 break;
 
             case R.id.btnGet:
-                RH.getInstance().getSubscriberByID(this);
+                RH.getInstance().getSubscriber(this);
                 break;
             case R.id.btnDelete:
-                RH.getInstance().deleteSubscriberByID(this);
+                RH.getInstance().deleteSubscriber(this);
                 break;
             case R.id.btnUpdate:
                 referralParams.setName("AndiDevOps");
-                RH.getInstance().updateSubscriberByID(this, referralParams);
+                RH.getInstance().updateSubscriber(this, referralParams);
                 break;
             case R.id.btnTrack:
                 referralParams.setEmail("Jayden@gmail.com");

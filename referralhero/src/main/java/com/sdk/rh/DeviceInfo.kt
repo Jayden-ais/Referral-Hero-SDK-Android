@@ -55,7 +55,7 @@ class DeviceInfo(private val context: Context) {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             context.resources.configuration.locales[0].country
         } else {
-           ""
+            ""
         }
     }
 
