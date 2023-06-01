@@ -16,7 +16,7 @@ task cleanBuildPublish(type: GradleBuild) {
 }
 
 def getVersionName = { ->
-    return "0.2" // Replace with version Name
+    return "0.3" // Replace with version Name
 }
 
 def getArtificatId = { ->
@@ -75,15 +75,6 @@ afterEvaluate {
                 groupId = "com.github.Jayden-ais"
                 artifactId = getArtificatId()
                 version = getVersionName()
-               // artifact(bundleReleaseAar)
-                pom {
-                    licenses {
-                        license {
-                            name = 'The Apache License, Version 2.0'
-                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        }
-                    }
-                }
             }
 
         }
