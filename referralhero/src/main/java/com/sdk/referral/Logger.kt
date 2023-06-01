@@ -1,7 +1,7 @@
-package com.sdk.rh
+package com.sdk.referral
 
 import android.util.Log
-import com.sdk.rh.RHUtil.formatString
+import com.sdk.referral.RHUtil.formatString
 import java.util.*
 
 class Logger : ILogger {

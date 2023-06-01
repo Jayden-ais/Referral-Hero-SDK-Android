@@ -9,11 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.sdk.rh.RH;
-import com.sdk.rh.networking.ApiResponse;
-import com.sdk.rh.networking.ListSubscriberData;
-import com.sdk.rh.networking.RankingDataContent;
-import com.sdk.rh.networking.ReferralParams;
+import com.sdk.referral.RH;
+import com.sdk.referral.networking.ApiResponse;
+import com.sdk.referral.networking.ListSubscriberData;
+import com.sdk.referral.networking.RankingDataContent;
+import com.sdk.referral.networking.ReferralParams;
 
 
 public class MainActivity extends AppCompatActivity implements RH.RHReferralCallBackListener, View.OnClickListener, RH.RHMyReferralCallBackListener, RH.RHLeaderBoardReferralCallBackListener {

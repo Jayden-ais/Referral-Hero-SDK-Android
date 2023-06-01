@@ -2,7 +2,8 @@ package com.example.referralsdk;
 
 import android.app.Application;
 
-import com.sdk.rh.RH;
+import com.sdk.referral.RH;
+
 
 public class MyApp extends Application {
 
@@ -10,5 +11,6 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         RH.getAutoInstance(this);
+
     }
 }

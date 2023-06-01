@@ -1,4 +1,4 @@
-package com.sdk.rh
+package com.sdk.referral
 
 class ApkParser {
     /**
@@ -31,7 +31,7 @@ class ApkParser {
         // Scan forward until we find the bytes: 0x02011000(x00100102 in normal int)
         var ii = xmlTagOff
         while (ii < xml.size - 4) {
-            if (LEW(xml, ii) == startTag) {
+            if (LEW(xml, ii) == com.sdk.referral.ApkParser.Companion.startTag) {
                 xmlTagOff = ii
                 break
             }
@@ -66,7 +66,7 @@ class ApkParser {
         var off = xmlTagOff
         while (off < xml.size) {
             val tag0 = LEW(xml, off)
-            if (tag0 == startTag) { // XML START TAG
+            if (tag0 == com.sdk.referral.ApkParser.Companion.startTag) { // XML START TAG
                 val numbAttrs = LEW(xml, off + 7 * 4) // Number of Attributes to follow
                 off += 9 * 4 // Skip over 6+3 words of startTag data
                 // Look for the Attributes
@@ -87,9 +87,9 @@ class ApkParser {
                         if (validURI(attrValue)) return attrValue
                     }
                 }
-            } else if (tag0 == endTag) { // XML END TAG
+            } else if (tag0 == com.sdk.referral.ApkParser.Companion.endTag) { // XML END TAG
                 off += 6 * 4 // Skip over 6 words of endTag data
-            } else if (tag0 == endDocTag) {  // END OF XML DOC TAG
+            } else if (tag0 == com.sdk.referral.ApkParser.Companion.endDocTag) {  // END OF XML DOC TAG
                 break
             } else {
                 break

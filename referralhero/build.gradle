@@ -7,16 +7,8 @@ plugins {
 }
 
 
-task cleanBuildPublishLocal(type: GradleBuild) {
-    tasks = ['clean', 'build', 'publishToMavenLocal']
-}
-
-task cleanBuildPublish(type: GradleBuild) {
-    tasks = ['clean', 'build', 'publish']
-}
-
 def getVersionName = { ->
-    return "0.3" // Replace with version Name
+    return "0.1" // Replace with version Name
 }
 
 def getArtificatId = { ->
@@ -25,7 +17,7 @@ def getArtificatId = { ->
 
 
 android {
-    namespace 'com.sdk.rh'
+    namespace 'com.referral.hero'
     compileSdk 33
 
     defaultConfig {
@@ -37,7 +29,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -76,8 +68,6 @@ afterEvaluate {
                 artifactId = getArtificatId()
                 version = getVersionName()
             }
-
         }
-
     }
 }
