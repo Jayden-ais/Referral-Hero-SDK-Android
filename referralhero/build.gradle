@@ -75,7 +75,7 @@ afterEvaluate {
                 groupId = "com.ais.sdk"
                 artifactId = getArtificatId()
                 version = getVersionName()
-                artifact(bundleReleaseAar)
+               // artifact(bundleReleaseAar)
                 pom {
                     licenses {
                         license {
