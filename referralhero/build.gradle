@@ -16,7 +16,7 @@ task cleanBuildPublish(type: GradleBuild) {
 }
 
 def getVersionName = { ->
-    return "0.1" // Replace with version Name
+    return "0.2" // Replace with version Name
 }
 
 def getArtificatId = { ->
@@ -72,7 +72,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
-                groupId = "com.ais.sdk"
+                groupId = "com.github.Jayden-ais"
                 artifactId = getArtificatId()
                 version = getVersionName()
                // artifact(bundleReleaseAar)
