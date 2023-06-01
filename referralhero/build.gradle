@@ -7,12 +7,20 @@ plugins {
 }
 
 
+task cleanBuildPublishLocal(type: GradleBuild) {
+    tasks = ['clean', 'build', 'publishToMavenLocal']
+}
+
+task cleanBuildPublish(type: GradleBuild) {
+    tasks = ['clean', 'build', 'publish']
+}
+
 def getVersionName = { ->
-    return "0.0.1" // Replace with version Name
+    return "0.1" // Replace with version Name
 }
 
 def getArtificatId = { ->
-    return "ais" // Replace with library name ID
+    return "referral" // Replace with library name ID
 }
 
 
@@ -64,10 +72,21 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
-                groupId = "com.referral.sdk"
+                groupId = "com.ais.sdk"
                 artifactId = getArtificatId()
                 version = getVersionName()
+                artifact(bundleReleaseAar)
+                pom {
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                }
             }
+
         }
+
     }
 }
