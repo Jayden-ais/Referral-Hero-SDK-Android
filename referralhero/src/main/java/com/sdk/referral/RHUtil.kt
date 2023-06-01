@@ -13,7 +13,7 @@ object RHUtil {
      */
     fun readRhKey(context: Context): String {
         var RHKey: String? = null
-        val metaDataKey = "com.rh.sdk.ApiKey"
+        val metaDataKey = "com.sdk.referral.ApiKey"
         // manifest overrides string resources
         try {
             val ai = context.packageManager.getApplicationInfo(
@@ -42,7 +42,7 @@ object RHUtil {
      */
     fun readRhCampaignID(context: Context): String {
         var RHKey: String? = null
-        val metaDataKey = "com.rh.sdk.uuid"
+        val metaDataKey = "com.sdk.referral.uuid"
         // manifest overrides string resources
         try {
             val ai = context.packageManager.getApplicationInfo(
