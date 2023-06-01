@@ -9,18 +9,3 @@ The Referral Hero SDK is a powerful tool for integrating referral functionality 
 To begin using the Referral Hero SDK, follow these steps:
 
 Step 1. Add the JitPack repository to your build.gradle file
-
-
-Add it in your root build.gradle at the end of repositories:
-
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
-Step 2. Add the dependency
-
-	dependencies {
-	      implementation 'com.github.Jayden-ais:RHSDK:0.0.1'
-	}
