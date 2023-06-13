@@ -1,13 +1,12 @@
 package com.sdk.referral.networking
 
-data class ListSubscriberData(
-    val response: String, val subscribers: List<SubscriberData>, val pagination: Pagination
-)
+import com.sdk.referral.model.SubscriberData
 
-data class rewardData(
+data class ListSubscriberData(
     val response: String,
+    val subscribers: List<SubscriberData>,
     val rewards: List<Reward>,
-    val pagination: Pagination,
+    val pagination: Pagination
 )
 
 data class Reward(

@@ -6,13 +6,19 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import com.sdk.referral.RH
-import com.sdk.referral.networking.*
+import com.sdk.referral.Utils.DeviceInfo
+import com.sdk.referral.model.ApiResponse
+import com.sdk.referral.model.RankingDataContent
+import com.sdk.referral.model.ReferralParams
+import com.sdk.referral.model.SubscriberData
+import com.sdk.referral.networking.ListSubscriberData
 
 
 class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.OnClickListener,
     RH.RHMyReferralCallBackListener, RH.RHLeaderBoardReferralCallBackListener,
-    RH.RHRewardCallBackListener, RH.RHVisitorReferralCallBackListener {
+    RH.RHRewardCallBackListener {
 
     lateinit var btnGet: Button
     lateinit var btnAdd: Button
@@ -25,6 +31,8 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
     lateinit var btnGetCampaign: Button
     lateinit var btnGetReferral: Button
     lateinit var btnCapture: Button
+    lateinit var btnReward: Button
+    lateinit var btnReffer: Button
     lateinit var txtReponse: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +48,10 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
         btnGetCampaign = findViewById(R.id.btnGetCampaign)
         btnGetReferral = findViewById(R.id.btnGetReferral)
         btnCapture = findViewById(R.id.btnCapture)
+        btnReward = findViewById(R.id.btnReward)
+        btnReffer = findViewById(R.id.btnReferrer)
         txtReponse = findViewById(R.id.txtReponse)
+
         btnAdd.setOnClickListener(this)
         btnGet.setOnClickListener(this)
         btnTrack.setOnClickListener(this)
@@ -50,15 +61,19 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
         btnGetCampaign.setOnClickListener(this)
         btnGetReferral.setOnClickListener(this)
         btnCapture.setOnClickListener(this)
+        btnReward.setOnClickListener(this)
+        btnReffer.setOnClickListener(this)
         btnDelete.setOnClickListener(this)
         btnUpdate.setOnClickListener(this)
     }
 
     override fun onFailureCallback(response: ApiResponse<SubscriberData>?) {
+        Log.e("Response", Gson().toJson(response))
         txtReponse.text = "Response : " + response?.status
     }
 
     override fun onSuccessCallback(response: ApiResponse<SubscriberData>?) {
+        Log.e("Response", Gson().toJson(response))
         txtReponse.text = "Response : " + response?.message
     }
 
@@ -73,70 +88,76 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
                 referralParams.name = "pm"
                 referralParams.referrer = ""
                 referralParams.uuid = "MF4345c63888"
-                RH.instance?.formSubmit(this, referralParams)
-                RH.instance?.prefHelper?.rHReferralLink
+                rh?.formSubmit(this, referralParams)
+                rh?.prefHelper?.rHReferralLink
             }
             R.id.btnGet -> RH.instance?.getSubscriber(this)
             R.id.btnDelete -> RH.instance?.deleteSubscriber(this)
             R.id.btnUpdate -> {
                 referralParams.name = "AndiDevOps"
-                RH.instance?.updateSubscriber(this, referralParams)
+                rh?.updateSubscriber(this, referralParams)
             }
             R.id.btnTrack -> {
                 referralParams.email = "Jayden@gmail.com"
                 referralParams.name = "AndiDev"
-                RH.instance?.trackReferral(this, referralParams)
+                rh?.trackReferral(this, referralParams)
             }
             R.id.btnCapture -> {
                 referralParams.social = "Whatsapp"
-                RH.instance?.captureShare(this, referralParams)
+                rh?.captureShare(this, referralParams)
             }
             R.id.btnGetReferral -> RH.instance?.getMyReferrals(this)
             R.id.btnGetCampaign -> RH.instance?.getLeaderboard(this)
-            R.id.btnConfirm -> RH.instance?.getRewards(this)
+            R.id.btnConfirm -> RH.instance?.confirmReferral(this)
+            R.id.btnPending -> {
+                referralParams.email = "Jayden@gmail.com"
+                referralParams.name = "AndiDev"
+                referralParams.ip_address = DeviceInfo(this).getIpAddress()
+                referralParams.screen_size = DeviceInfo(this).getDeviceScreenSize()
+                referralParams.device = DeviceInfo(this).getOperatingSystem()
+                referralParams.referrer = "";
+                rh?.pendingReferral(this, referralParams)
+            }
             R.id.btnOrgTrack -> {
-                referralParams.name = "Name"
-                referralParams.osType = "Android"
-                referralParams.ip_address = "123.456.889.0123"
-                referralParams.screen_size = "64*382"
-                referralParams.device = "Android"
-                referralParams.referrer = "2c2dbefb"
-                referralParams.hosting_url = "https://app.referralhero.com/dashboard/lists/MF83c9616aa3/analytics/traffic"
-                RH.instance?.getvisitorReferral(this,referralParams)
+                referralParams.email = "Jayden@gmail.com"
+                rh?.organicTrackReferral(this, referralParams)
+            }
+            R.id.btnReward -> {
+                rh?.getRewards(this)
+            }
+            R.id.btnReferrer -> {
+                referralParams.osType = DeviceInfo(this).getOperatingSystem()
+                referralParams.device = DeviceInfo(this).getDeviceModel()
+                referralParams.ip_address = DeviceInfo(this).getIpAddress()
+                referralParams.screen_size = DeviceInfo(this).getIpAddress()
+                rh?.organicTrackReferral(this, referralParams)
             }
         }
+
     }
 
     override fun onMyReferralSuccessCallback(response: ApiResponse<ListSubscriberData>?) {
-        response?.data?.response?.let { Log.e("onMyReferralSuccess", it) }
+        Log.e("onMyReferralSuccess", Gson().toJson(response))
     }
 
     override fun onMyReferralFailureCallback(response: ApiResponse<ListSubscriberData>?) {
-        response?.message?.let { Log.e("onMyReferralSuccess", it) }
+        Log.e("onMyReferralSuccess", Gson().toJson(response))
     }
 
     override fun onLeaderBoardReferralSuccessCallback(response: ApiResponse<RankingDataContent>?) {
-        Log.e("onLeaderBoardSuccess", response?.data?.count.toString())
+        Log.e("onLeaderBoardSuccess", Gson().toJson(response))
     }
 
     override fun onLeaderBoardReferralFailureCallback(response: ApiResponse<RankingDataContent>?) {
-        response?.message?.let { Log.e("onLeaderBoardSuccess", it) }
+        Log.e("onLeaderBoardSuccess", Gson().toJson(response))
     }
 
-    override fun onRewardSuccessCallback(response: ApiResponse<Reward>?) {
-        response?.data?.createdAt?.let { Log.e("onMyRewardSuccess", it.toString()) }
+    override fun onRewardSuccessCallback(response: ApiResponse<ListSubscriberData>?) {
+        Log.e("onRewardSuccess", Gson().toJson(response))
     }
 
-    override fun onRewardFailureCallback(response: ApiResponse<Reward>?) {
-        response?.message?.let { Log.e("onMyRewardFailure", it) }
-    }
-
-    override fun onVisitorSuccessCallback(response: ApiResponse<VisitorReferral>?) {
-        response?.data?.code?.let { Log.e("onVisitorSuccess", it.toString()) }
-    }
-
-    override fun onVisitorFailureCallback(response: ApiResponse<VisitorReferral>?) {
-        response?.message?.let { Log.e("onVisitorFailure", it) }
+    override fun onRewardFailureCallback(response: ApiResponse<ListSubscriberData>?) {
+        Log.e("onRewardSuccess", Gson().toJson(response))
     }
 
 

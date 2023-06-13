@@ -1,4 +1,4 @@
-package com.sdk.referral
+package com.sdk.referral.Utils
 
 import android.content.BroadcastReceiver
 import android.content.Context

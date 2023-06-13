@@ -1,4 +1,4 @@
-package com.sdk.referral.networking
+package com.sdk.referral.model
 
 class ReferralParams {
     var transactionId: String? = null

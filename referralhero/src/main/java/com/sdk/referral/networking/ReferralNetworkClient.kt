@@ -3,8 +3,12 @@ package com.sdk.referral.networking
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.sdk.referral.PrefHelper
-import com.sdk.referral.RHUtil
+import com.sdk.referral.Utils.PrefHelper
+import com.sdk.referral.Utils.RHUtil
+import com.sdk.referral.model.ApiResponse
+import com.sdk.referral.model.RankingDataContent
+import com.sdk.referral.model.ReferralParams
+import com.sdk.referral.model.SubscriberData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -241,7 +245,7 @@ class ReferralNetworkClient {
 
     suspend fun serverRequestRewardAsync(
         context: Context, endpoint: String
-    ): ApiResponse<Reward> {
+    ): ApiResponse<ListSubscriberData> {
 
         val urlBuilder = (PrefHelper.aPIBaseUrl + endpoint).toHttpUrlOrNull()?.newBuilder()
         val url = urlBuilder?.build()?.toString()
@@ -254,9 +258,9 @@ class ReferralNetworkClient {
         return withContext(Dispatchers.IO) {
             val response = client.newCall(request).execute()
             val responseString = response.body?.string()
-            val parsedResponse: ApiResponse<Reward> = gson.fromJson(
+            val parsedResponse: ApiResponse<ListSubscriberData> = gson.fromJson(
                 responseString,
-                object : TypeToken<ApiResponse<Reward>>() {}.type
+                object : TypeToken<ApiResponse<ListSubscriberData>>() {}.type
             )
             if (response.code == 200) {
                 parsedResponse
@@ -266,34 +270,4 @@ class ReferralNetworkClient {
         }
     }
 
-
-    suspend fun serverRequestVisitorReferralCallBackAsync(
-        context: Context, endpoint: String, referralParams: ReferralParams
-    ): ApiResponse<VisitorReferral> {
-
-        val jsonMediaType = "application/json".toMediaTypeOrNull()
-        val requestBody: RequestBody = Gson().toJson(referralParams).toRequestBody(jsonMediaType)
-        val urlBuilder = (PrefHelper.aPIBaseUrl + endpoint).toHttpUrlOrNull()?.newBuilder()
-        val url = urlBuilder?.build()?.toString()
-
-        val requestBuilder =
-            Request.Builder().url(url!!).addHeader("Authorization", RHUtil.readRhKey(context))
-                .addHeader("Accept", "application/vnd.referralhero.v1").post(requestBody)
-
-        val request = requestBuilder.build()
-        return withContext(Dispatchers.IO) {
-            val response = client.newCall(request).execute()
-            val responseString = response.body?.string()
-            val parsedResponse: ApiResponse<VisitorReferral> = gson.fromJson(
-                responseString,
-                object : TypeToken<ApiResponse<VisitorReferral>>() {}.type
-            )
-            if (response.code == 200) {
-                parsedResponse
-            } else {
-                ApiResponse("error", parsedResponse.message, parsedResponse.code, null, null, 0)
-            }
-
-        }
-    }
 }

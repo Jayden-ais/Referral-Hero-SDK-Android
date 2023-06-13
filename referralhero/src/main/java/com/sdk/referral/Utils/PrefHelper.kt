@@ -1,4 +1,4 @@
-package com.sdk.referral
+package com.sdk.referral.Utils
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -439,7 +439,7 @@ class PrefHelper(context: Context) {
         }
 
         val aPIBaseUrl: String
-            get() = "https://dev.referralhero.com/api/sdk/v1/lists/"
+            get() = "https://app.referralhero.com/api/sdk/v1/lists/"
 
     }
 }
