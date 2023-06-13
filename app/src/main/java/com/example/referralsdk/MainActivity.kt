@@ -8,12 +8,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.sdk.referral.RH
-import com.sdk.referral.Utils.DeviceInfo
-import com.sdk.referral.model.ApiResponse
-import com.sdk.referral.model.RankingDataContent
-import com.sdk.referral.model.ReferralParams
-import com.sdk.referral.model.SubscriberData
-import com.sdk.referral.networking.ListSubscriberData
+import com.sdk.referral.model.*
+import com.sdk.referral.utils.DeviceInfo
 
 
 class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.OnClickListener,
