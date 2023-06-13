@@ -11,7 +11,8 @@ import com.sdk.referral.networking.*
 
 
 class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.OnClickListener,
-    RH.RHMyReferralCallBackListener, RH.RHLeaderBoardReferralCallBackListener {
+    RH.RHMyReferralCallBackListener, RH.RHLeaderBoardReferralCallBackListener,
+    RH.RHRewardCallBackListener, RH.RHVisitorReferralCallBackListener {
 
     lateinit var btnGet: Button
     lateinit var btnAdd: Button
@@ -67,9 +68,9 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
 
         when (v.id) {
             R.id.btnAdd -> {
-                referralParams.email = "Jayden@gmail.com"
+                referralParams.email = "dan@gmail.com"
                 referralParams.domain = "https://wongazoma.aistechnolabs.info/action"
-                referralParams.name = "AndiDev"
+                referralParams.name = "pm"
                 referralParams.referrer = ""
                 referralParams.uuid = "MF4345c63888"
                 RH.instance?.formSubmit(this, referralParams)
@@ -92,6 +93,17 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
             }
             R.id.btnGetReferral -> RH.instance?.getMyReferrals(this)
             R.id.btnGetCampaign -> RH.instance?.getLeaderboard(this)
+            R.id.btnConfirm -> RH.instance?.getRewards(this)
+            R.id.btnOrgTrack -> {
+                referralParams.name = "Name"
+                referralParams.osType = "Android"
+                referralParams.ip_address = "123.456.889.0123"
+                referralParams.screen_size = "64*382"
+                referralParams.device = "Android"
+                referralParams.referrer = "2c2dbefb"
+                referralParams.hosting_url = "https://app.referralhero.com/dashboard/lists/MF83c9616aa3/analytics/traffic"
+                RH.instance?.getvisitorReferral(this,referralParams)
+            }
         }
     }
 
@@ -109,6 +121,22 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
 
     override fun onLeaderBoardReferralFailureCallback(response: ApiResponse<RankingDataContent>?) {
         response?.message?.let { Log.e("onLeaderBoardSuccess", it) }
+    }
+
+    override fun onRewardSuccessCallback(response: ApiResponse<Reward>?) {
+        response?.data?.createdAt?.let { Log.e("onMyRewardSuccess", it.toString()) }
+    }
+
+    override fun onRewardFailureCallback(response: ApiResponse<Reward>?) {
+        response?.message?.let { Log.e("onMyRewardFailure", it) }
+    }
+
+    override fun onVisitorSuccessCallback(response: ApiResponse<VisitorReferral>?) {
+        response?.data?.code?.let { Log.e("onVisitorSuccess", it.toString()) }
+    }
+
+    override fun onVisitorFailureCallback(response: ApiResponse<VisitorReferral>?) {
+        response?.message?.let { Log.e("onVisitorFailure", it) }
     }
 
 

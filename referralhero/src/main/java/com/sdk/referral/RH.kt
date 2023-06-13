@@ -20,6 +20,8 @@ class RH(var context_: Context) {
     private var trackReferralCallback: RHReferralCallBackListener? = null
     private var myReferralCallback: RHMyReferralCallBackListener? = null
     private var leaderBoardReferralCallback: RHLeaderBoardReferralCallBackListener? = null
+    private var rewardCallback: RHRewardCallBackListener? = null
+    private var visitorreferralCallback: RHVisitorReferralCallBackListener? = null
 
     var logger: Logger? = null
     init {
@@ -289,6 +291,40 @@ class RH(var context_: Context) {
         }
     }
 
+    private fun handlerewardApiResponse(response: ApiResponse<Reward>, ordinal: Int) {
+        if (response.status == "ok") {
+            if (ordinal == ApiConstants.OperationType.DELETE.ordinal) prefHelper.clearPrefOnBranchKeyChange()
+
+            if (ordinal == ApiConstants.OperationType.ADD.ordinal) {
+                response.data?.let {
+                    prefHelper.rHReferralLink = it.name
+                    prefHelper.appStoreReferrer = it.status
+                }
+            }
+            rewardCallback?.onRewardSuccessCallback(response)
+        } else {
+            prefHelper.rHReferralLink = PrefHelper.NO_STRING_VALUE
+            rewardCallback?.onRewardFailureCallback(response)
+        }
+    }
+
+    private fun handleVisitorReferralApiResponse(response: ApiResponse<VisitorReferral>, ordinal: Int) {
+        if (response.status == "ok") {
+            if (ordinal == ApiConstants.OperationType.DELETE.ordinal) prefHelper.clearPrefOnBranchKeyChange()
+
+            if (ordinal == ApiConstants.OperationType.ADD.ordinal) {
+                response.data?.let {
+                    prefHelper.rHReferralLink = it.referralLink
+                    prefHelper.appStoreReferrer = it.universalLink
+                    prefHelper.rHSubscriberID = it.id
+                }
+            }
+            visitorreferralCallback?.onVisitorSuccessCallback(response)
+        } else {
+            prefHelper.rHReferralLink = PrefHelper.NO_STRING_VALUE
+            visitorreferralCallback?.onVisitorFailureCallback(response)
+        }
+    }
     /*
     - Created a new function `getMyReferrals` to fetch referral data specific to the current subscriber.
     - Updated the function signature to include the `callback` parameter of type `RHMyReferralCallBackListener`.
@@ -345,6 +381,45 @@ class RH(var context_: Context) {
         }
     }
 
+    fun getRewards(callback: RHRewardCallBackListener?) {
+        rewardCallback = callback
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = referralNetworkClient.serverRequestRewardAsync(
+                    context_,
+                    "${RHUtil.readRhCampaignID(context_)}/subscribers/${prefHelper.rHSubscriberID}/rewards"
+                )
+                withContext(Dispatchers.Main) {
+                    handlerewardApiResponse(response, ApiConstants.OperationType.GET.ordinal)
+                }
+            } catch (exception: Exception) {
+                withContext(Dispatchers.Main) {
+                    logger?.error(exception.toString())
+                }
+            }
+        }
+    }
+
+    fun getvisitorReferral(callback: RHVisitorReferralCallBackListener?, referralParams: ReferralParams) {
+        visitorreferralCallback = callback
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = referralNetworkClient.serverRequestVisitorReferralCallBackAsync(
+                    context_,
+                    "${RHUtil.readRhCampaignID(context_)}/subscribers/visitor_referral",
+                    referralParams
+                )
+                withContext(Dispatchers.Main) {
+                    handleVisitorReferralApiResponse(response, ApiConstants.OperationType.VISITORREFERRAL.ordinal)
+                }
+            } catch (exception: Exception) {
+                withContext(Dispatchers.Main) {
+                    logger?.error(exception.toString())
+                }
+            }
+        }
+    }
+
 
     /**
     - Updated the function signature to include the response type `ApiResponse<ListSubscriberData>`.
@@ -384,6 +459,16 @@ class RH(var context_: Context) {
     interface RHLeaderBoardReferralCallBackListener {
         fun onLeaderBoardReferralSuccessCallback(response: ApiResponse<RankingDataContent>?)
         fun onLeaderBoardReferralFailureCallback(response: ApiResponse<RankingDataContent>?)
+    }
+
+    interface RHRewardCallBackListener {
+        fun onRewardSuccessCallback(response: ApiResponse<Reward>?)
+        fun onRewardFailureCallback(response: ApiResponse<Reward>?)
+    }
+
+    interface RHVisitorReferralCallBackListener {
+        fun onVisitorSuccessCallback(response: ApiResponse<VisitorReferral>?)
+        fun onVisitorFailureCallback(response: ApiResponse<VisitorReferral>?)
     }
 
     companion object {
