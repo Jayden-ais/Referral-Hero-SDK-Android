@@ -7,17 +7,25 @@ plugins {
 }
 
 
+task cleanBuildPublishLocal(type: GradleBuild) {
+    tasks = ['clean', 'build', 'publishToMavenLocal']
+}
+
+task cleanBuildPublish(type: GradleBuild) {
+    tasks = ['clean', 'build', 'publish']
+}
+
 def getVersionName = { ->
-    return "V1.0" // Replace with version Name
+    return "0.1.0" // Replace with version Name
 }
 
 def getArtificatId = { ->
-    return "referralhero" // Replace with library name ID
+    return "referralHero" // Replace with library name ID
 }
 
 
 android {
-    namespace 'com.referral.hero'
+    namespace 'com.sdk.rh'
     compileSdk 33
 
     defaultConfig {
@@ -29,7 +37,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -67,7 +75,19 @@ afterEvaluate {
                 groupId = "com.github.Jayden-ais"
                 artifactId = getArtificatId()
                 version = getVersionName()
+                // artifact(bundleReleaseAar)
+                pom {
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                }
             }
+
         }
+
     }
 }
+
