@@ -8,5 +8,7 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         RH.getAutoInstance(this)
+
+        RH.getAutoInstance()
     }
 }
