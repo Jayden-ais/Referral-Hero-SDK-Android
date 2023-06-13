@@ -7,13 +7,6 @@ plugins {
 }
 
 
-task cleanBuildPublishLocal(type: GradleBuild) {
-    tasks = ['clean', 'build', 'publishToMavenLocal']
-}
-
-task cleanBuildPublish(type: GradleBuild) {
-    tasks = ['clean', 'build', 'publish']
-}
 
 def getVersionName = { ->
     return "0.1.0" // Replace with version Name
@@ -74,16 +67,7 @@ afterEvaluate {
                 from components.release
                 groupId = "com.github.Jayden-ais"
                 artifactId = "ReferralHero"
-                version = "13.6.27"
-
-                pom {
-                    licenses {
-                        license {
-                            name = 'The Apache License, Version 2.0'
-                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        }
-                    }
-                }
+                version = "13.6.28"
             }
 
         }
