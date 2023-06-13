@@ -8,11 +8,11 @@ plugins {
 
 
 def getVersionName = { ->
-    return "0.6" // Replace with version Name
+    return "V1.0" // Replace with version Name
 }
 
 def getArtificatId = { ->
-    return "referral" // Replace with library name ID
+    return "referralhero" // Replace with library name ID
 }
 
 
