@@ -1,9 +1,10 @@
-package com.sdk.referral.Utils
+package com.sdk.referral.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.sdk.referral.utils.PrefHelper
 
 
 class RhReferrerReceiver : BroadcastReceiver() {

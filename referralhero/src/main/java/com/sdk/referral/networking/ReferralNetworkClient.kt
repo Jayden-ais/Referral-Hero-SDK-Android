@@ -3,12 +3,9 @@ package com.sdk.referral.networking
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.sdk.referral.Utils.PrefHelper
-import com.sdk.referral.Utils.RHUtil
-import com.sdk.referral.model.ApiResponse
-import com.sdk.referral.model.RankingDataContent
-import com.sdk.referral.model.ReferralParams
-import com.sdk.referral.model.SubscriberData
+import com.sdk.referral.model.*
+import com.sdk.referral.utils.PrefHelper
+import com.sdk.referral.utils.RHUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull

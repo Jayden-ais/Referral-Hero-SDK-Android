@@ -2,17 +2,13 @@ package com.sdk.referral
 
 import android.content.Context
 import android.text.TextUtils
-import com.sdk.referral.Logger.Logger
-import com.sdk.referral.Utils.DeviceInfo
-import com.sdk.referral.Utils.PrefHelper
-import com.sdk.referral.Utils.RHUtil
-import com.sdk.referral.model.ApiResponse
-import com.sdk.referral.model.RankingDataContent
-import com.sdk.referral.model.ReferralParams
-import com.sdk.referral.model.SubscriberData
+import com.sdk.referral.logger.Logger
+import com.sdk.referral.model.*
 import com.sdk.referral.networking.ApiConstants
-import com.sdk.referral.networking.ListSubscriberData
 import com.sdk.referral.networking.ReferralNetworkClient
+import com.sdk.referral.utils.DeviceInfo
+import com.sdk.referral.utils.PrefHelper
+import com.sdk.referral.utils.RHUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +29,7 @@ class RH(var context_: Context) {
     private var rewardCallback: RHRewardCallBackListener? = null
 
     var logger: Logger? = null
+
     init {
         deviceInfo = DeviceInfo(context_)
         prefHelper = PrefHelper(context_)
@@ -250,6 +247,29 @@ class RH(var context_: Context) {
         }
     }
 
+    fun getReferrer(
+        callback: RHReferralCallBackListener?,
+        referralParams: ReferralParams
+    ) {
+        trackReferralCallback = callback
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = referralNetworkClient.serverRequestCallBackAsync(
+                    context_,
+                    "${RHUtil.readRhCampaignID(context_)}/subscribers/referrer",
+                    referralParams
+                )
+                withContext(Dispatchers.Main) {
+                    handleApiResponse(response, ApiConstants.OperationType.TRACK.ordinal)
+                }
+            } catch (exception: Exception) {
+                withContext(Dispatchers.Main) {
+                    logger?.error(exception.toString())
+                }
+            }
+        }
+    }
+
     /**
      * Confirm a referral. Useful when your campaign has enabled the "Manual confirmation"
      * option and you want to confirm referrals when a specific event occur (e.g: upgrade to a paid plan,
@@ -384,8 +404,6 @@ class RH(var context_: Context) {
             }
         }
     }
-
-
 
 
     /**

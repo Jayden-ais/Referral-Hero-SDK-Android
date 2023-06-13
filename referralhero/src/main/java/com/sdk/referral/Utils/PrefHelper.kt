@@ -1,4 +1,4 @@
-package com.sdk.referral.Utils
+package com.sdk.referral.utils
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -37,6 +37,7 @@ class PrefHelper(context: Context) {
         prefsEditor_ = appSharedPrefs_.edit()
         mContext = context
     }
+
     /**
      * Set the given Referral API Key  to preference. Clears the preference data if the key is a new key.
      *

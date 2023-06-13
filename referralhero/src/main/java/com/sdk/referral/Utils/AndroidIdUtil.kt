@@ -1,4 +1,4 @@
-package com.sdk.referral.Utils
+package com.sdk.referral.utils
 
 import android.content.Context
 import android.provider.Settings.Secure

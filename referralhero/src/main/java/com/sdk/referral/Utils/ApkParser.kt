@@ -1,4 +1,4 @@
-package com.sdk.referral.Utils
+package com.sdk.referral.utils
 
 class ApkParser {
     /**
