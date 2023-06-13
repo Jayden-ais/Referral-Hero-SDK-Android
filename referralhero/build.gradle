@@ -20,7 +20,7 @@ def getVersionName = { ->
 }
 
 def getArtificatId = { ->
-    return "referralHero" // Replace with library name ID
+    return "referral" // Replace with library name ID
 }
 
 
@@ -51,9 +51,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
+    /*kotlinOptions {
         jvmTarget = '1.8'
-    }
+    }*/
 
 }
 dependencies {
@@ -73,17 +73,8 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = "com.github.Jayden-ais"
-                artifactId = getArtificatId()
-                version = getVersionName()
-                // artifact(bundleReleaseAar)
-                pom {
-                    licenses {
-                        license {
-                            name = 'The Apache License, Version 2.0'
-                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        }
-                    }
-                }
+                artifactId = "referral"
+                version = "1.1.1"
             }
 
         }
