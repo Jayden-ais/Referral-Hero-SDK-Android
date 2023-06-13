@@ -73,8 +73,8 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = "com.github.Jayden-ais"
-                artifactId = "referral"
-                version = "13.6.25"
+                artifactId = "ReferralHero"
+                version = "13.6.26"
             }
 
         }
