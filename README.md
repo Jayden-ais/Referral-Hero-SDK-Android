@@ -66,7 +66,7 @@ dependencies {
 ## Usage
 ### Import
 ```kotlin
-import com.github.vinchamp77.buildutils.BuildExt
+import com.github.Jayden-ais:Referral-Hero-SDK-Android:0.0.0
 ```
 
 ### Examples
