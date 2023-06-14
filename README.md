@@ -8,18 +8,65 @@ The Referral Hero SDK is a powerful tool for integrating referral functionality 
 
 To begin using the Referral Hero SDK, follow these steps:
 
-Step 1. Add the JitPack repository to your build.gradle file
-Add it in your root build.gradle at the end of repositories:
+## Setup
+### 1. Import JitPack Android Library
+Add `maven { url 'https://jitpack.io' }` in
+<details open>
+  <summary>groovy - settings.gradle</summary>
 
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
-  
-  Step 2. Add the dependency
+```gradle
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
 
-	dependencies {
-	        implementation 'com.github.Jayden-ais:referral:0.1'
-	}
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+</details>
+
+<details open>
+  <summary>kotlin - settings.gradle.kts</summary>
+
+```gradle
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+
+        maven ("https://jitpack.io")
+    }
+}
+```
+</details>
+
+### 2. Add dependency
+<details open>
+  <summary>groovy - build.gradle</summary>
+
+```gradle
+dependencies {
+    implementation "com.github.Jayden-ais:Referral-Hero-SDK-Android:0.0.0"
+}
+```
+</details>
+<details open>
+  <summary>kotlin - build.gradle.kts</summary>
+
+```gradle
+dependencies {
+    implementation("com.github.Jayden-ais:Referral-Hero-SDK-Android:0.0.0")
+}
+```
+</details>
+
+## Usage
+### Import
+```kotlin
+import com.github.vinchamp77.buildutils.BuildExt
+```
+
+### Examples
