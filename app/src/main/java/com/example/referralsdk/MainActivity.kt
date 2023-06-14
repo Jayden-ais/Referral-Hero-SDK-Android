@@ -69,8 +69,8 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
     }
 
     override fun onSuccessCallback(response: ApiResponse<SubscriberData>?) {
-        Log.e("Response", Gson().toJson(response))
-        txtReponse.text = "Response : " + response?.message
+        Log.e("onSuccessCallback", Gson().toJson(response?.data))
+        txtReponse.text = "Response : " + response?.status
     }
 
     override fun onClick(v: View) {
