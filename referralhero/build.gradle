@@ -1,19 +1,16 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android'
-    id 'maven-publish'
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-android")
+    id("maven-publish")
 
 }
 
 
-
-def getVersionName = { ->
-    return "0.1.0" // Replace with version Name
+def getVersionName = { -> return "0.1.0" // Replace with version Name
 }
 
-def getArtificatId = { ->
-    return "referral" // Replace with library name ID
+def getArtificatId = { -> return "HeroReferral" // Replace with library name ID
 }
 
 
@@ -60,18 +57,16 @@ dependencies {
 }
 
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.Jayden-ais'
+            artifactId = 'HeroReferral'
+            version = '0.0.2'
+            afterEvaluate {
                 from components.release
-                groupId = "com.github.Jayden-ais"
-                artifactId = "ReferralHero"
-                version = "0.1.1"
             }
-
         }
-
     }
 }
 
