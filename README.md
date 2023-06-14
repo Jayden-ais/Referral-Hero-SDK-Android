@@ -70,3 +70,6 @@ import com.github.Jayden-ais:Referral-Hero-SDK-Android:0.0.0
 ```
 
 ### Examples
+| APIs | App Examples |
+| --- | --- |
+| All AP is demo | [MainScreen.kt](https://github.com/Jayden-ais/Referral-Hero-SDK-Android/blob/master/app/src/main/java/com/example/referralsdk/MainActivity.kt) - Show all API usages|
