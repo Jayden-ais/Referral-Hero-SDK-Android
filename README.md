@@ -49,7 +49,7 @@ dependencyResolutionManagement {
 
 ```gradle
 dependencies {
-    implementation "com.github.Jayden-ais:Referral-Hero-SDK-Android:0.0.0"
+    implementation "com.github.Jayden-ais:Referral-Hero-SDK-Android:0.0.2"
 }
 ```
 </details>
@@ -58,16 +58,13 @@ dependencies {
 
 ```gradle
 dependencies {
-    implementation("com.github.Jayden-ais:Referral-Hero-SDK-Android:0.0.0")
+    implementation("com.github.Jayden-ais:Referral-Hero-SDK-Android:0.0.2")
 }
 ```
 </details>
 
 ## Usage
-### Import
-```kotlin
-import com.github.Jayden-ais:Referral-Hero-SDK-Android:0.0.0
-```
+
 
 ### Examples
 | APIs | App Examples |
