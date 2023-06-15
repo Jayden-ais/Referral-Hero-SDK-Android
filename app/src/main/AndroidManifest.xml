@@ -30,7 +30,7 @@
                 <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="campaign.referralhero.com" />
-                <data android:pathPattern="/MF4937928cce/dashboard" />
+                <data android:pathPattern="/MFdea3239f91/dashboard" />
             </intent-filter>
 
         </activity>
@@ -41,7 +41,7 @@
 
         <meta-data
             android:name="com.sdk.referral.uuid"
-            android:value="MF778b46a792" />
+            android:value="MFdea3239f91" />
 
 
     </application>

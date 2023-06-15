@@ -3,6 +3,7 @@ package com.sdk.referral.networking
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.sdk.referral.logger.Logger
 import com.sdk.referral.model.*
 import com.sdk.referral.utils.DeviceInfo
 import com.sdk.referral.utils.PrefHelper
@@ -44,6 +45,7 @@ class ReferralNetworkClient {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 // Handle the API call failure
+                Logger().error(e.message)
                 val errorResponse =
                     ApiResponse<SubscriberData>("error", e.message, "0", null, null, 0)
                 callback.invoke(errorResponse)
@@ -61,6 +63,7 @@ class ReferralNetworkClient {
                     callback.invoke(parsedResponse)
                 } else {
                     // Handle the API call failure
+                    Logger().error(parsedResponse.message)
                     callback.invoke(
                         ApiResponse(
                             "error",
@@ -107,6 +110,7 @@ class ReferralNetworkClient {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 // Handle the API call failure
+                Logger().error(e.message)
                 val errorResponse =
                     ApiResponse<SubscriberData>("error", e.message, "0", null, null, 0)
                 callback.invoke(errorResponse)
@@ -167,6 +171,7 @@ class ReferralNetworkClient {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 // Handle the API call failure
+                Logger().error(e.message)
                 val errorResponse =
                     ApiResponse<SubscriberData>("error", e.message, "0", null, null, 0)
                 callback.invoke(errorResponse)
@@ -228,6 +233,7 @@ class ReferralNetworkClient {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 // Handle the API call failure
+                Logger().error(e.message)
                 val errorResponse =
                     ApiResponse<SubscriberData>("error", e.message, "0", null, null, 0)
                 callback.invoke(errorResponse)
@@ -286,6 +292,7 @@ class ReferralNetworkClient {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 // Handle the API call failure
+                Logger().error(e.message)
                 val errorResponse =
                     ApiResponse<ListSubscriberData>("error", e.message, "0", null, null, 0)
                 callback.invoke(errorResponse)
@@ -344,6 +351,7 @@ class ReferralNetworkClient {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 // Handle the API call failure
+                Logger().error(e.message)
                 val errorResponse =
                     ApiResponse<RankingDataContent>("error", e.message, "0", null, null, 0)
                 callback.invoke(errorResponse)
@@ -395,6 +403,7 @@ class ReferralNetworkClient {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 // Handle the API call failure
+                Logger().error(e.message)
                 val errorResponse =
                     ApiResponse<ListSubscriberData>("error", e.message, "0", null, null, 0)
                 callback.invoke(errorResponse)
@@ -450,6 +459,7 @@ class ReferralNetworkClient {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 // Handle the API call failure
+                Logger().error(e.message)
                 val errorResponse =
                     ApiResponse<SubscriberData>("error", e.message, "0", null, null, 0)
                 callback.invoke(errorResponse)
