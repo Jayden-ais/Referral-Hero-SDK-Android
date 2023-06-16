@@ -48,7 +48,7 @@ class ReferralNetworkClient {
             override fun onFailure(call: Call, e: IOException) {
                 if (continuation.context.isActive) {
                     val errorResponse = ApiResponse<SubscriberData>(
-                        "onFailure",
+                        "error",
                         e.message,
                         "0",
                         null,
@@ -125,7 +125,7 @@ class ReferralNetworkClient {
                         null,
                         0
                     )
-                    continuation.resumeWith(Result.failure(IOException(Gson().toJson(errorResponse))))
+                    continuation.resume(errorResponse)
                 }
             }
 
@@ -148,15 +148,7 @@ class ReferralNetworkClient {
                             null,
                             0
                         )
-                        continuation.resumeWith(
-                            Result.failure(
-                                IOException(
-                                    Gson().toJson(
-                                        errorResponse
-                                    )
-                                )
-                            )
-                        )
+                        continuation.resume(errorResponse)
                     }
                 }
             }
@@ -200,7 +192,7 @@ class ReferralNetworkClient {
                         null,
                         0
                     )
-                    continuation.resumeWith(Result.failure(IOException(Gson().toJson(errorResponse))))
+                    continuation.resume(errorResponse)
                 }
             }
 
@@ -223,15 +215,7 @@ class ReferralNetworkClient {
                             null,
                             0
                         )
-                        continuation.resumeWith(
-                            Result.failure(
-                                IOException(
-                                    Gson().toJson(
-                                        errorResponse
-                                    )
-                                )
-                            )
-                        )
+                        continuation.resume(errorResponse)
                     }
                 }
             }
@@ -277,7 +261,7 @@ class ReferralNetworkClient {
                         null,
                         0
                     )
-                    continuation.resumeWith(Result.failure(IOException(Gson().toJson(errorResponse))))
+                    continuation.resume(errorResponse)
                 }
             }
 
@@ -300,15 +284,7 @@ class ReferralNetworkClient {
                             null,
                             0
                         )
-                        continuation.resumeWith(
-                            Result.failure(
-                                IOException(
-                                    Gson().toJson(
-                                        errorResponse
-                                    )
-                                )
-                            )
-                        )
+                        continuation.resume(errorResponse)
                     }
                 }
             }
@@ -350,7 +326,7 @@ class ReferralNetworkClient {
                         null,
                         0
                     )
-                    continuation.resumeWith(Result.failure(IOException(Gson().toJson(errorResponse))))
+                    continuation.resume(errorResponse)
                 }
             }
 
@@ -373,15 +349,7 @@ class ReferralNetworkClient {
                             null,
                             0
                         )
-                        continuation.resumeWith(
-                            Result.failure(
-                                IOException(
-                                    Gson().toJson(
-                                        errorResponse
-                                    )
-                                )
-                            )
-                        )
+                        continuation.resume(errorResponse)
                     }
                 }
             }
@@ -435,7 +403,7 @@ class ReferralNetworkClient {
                         null,
                         0
                     )
-                    continuation.resumeWith(Result.failure(IOException(Gson().toJson(errorResponse))))
+                    continuation.resume(errorResponse)
                 }
             }
         })
@@ -479,7 +447,7 @@ class ReferralNetworkClient {
                         null,
                         0
                     )
-                    continuation.resumeWith(Result.failure(IOException(Gson().toJson(errorResponse))))
+                    continuation.resume(errorResponse)
                 }
             }
         })
@@ -515,7 +483,7 @@ class ReferralNetworkClient {
                         null,
                         0
                     )
-                    continuation.resumeWith(Result.failure(IOException(Gson().toJson(errorResponse))))
+                    continuation.resume(errorResponse)
                 }
             }
 
@@ -538,15 +506,7 @@ class ReferralNetworkClient {
                             null,
                             0
                         )
-                        continuation.resumeWith(
-                            Result.failure(
-                                IOException(
-                                    Gson().toJson(
-                                        errorResponse
-                                    )
-                                )
-                            )
-                        )
+                        continuation.resume(errorResponse)
                     }
                 }
             }

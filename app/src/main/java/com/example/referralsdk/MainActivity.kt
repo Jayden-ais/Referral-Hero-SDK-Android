@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.sdk.referral.RH
@@ -95,9 +96,12 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
 
                 rh?.getSubscriber(object : RH.RHReferralCallBackListener {
                     override fun onSuccessCallback(response: ApiResponse<SubscriberData>?) {
-                        Log.e("Code", response?.code.toString());
-                        Log.e("Code", response?.data?.email.toString());
-                        Log.e("Code", response?.data?.code.toString());
+                        Log.e("Reponse", Gson().toJson(response))
+                        Toast.makeText(
+                            this@MainActivity,
+                            response?.message.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     override fun onFailureCallback(response: ApiResponse<SubscriberData>?) {
