@@ -80,15 +80,7 @@ class ReferralNetworkClient {
                             null,
                             0
                         )
-                        continuation.resumeWith(
-                            Result.failure(
-                                IOException(
-                                    Gson().toJson(
-                                        errorResponse
-                                    )
-                                )
-                            )
-                        )
+                        continuation.resume(errorResponse)
                     }
                 }
             }
