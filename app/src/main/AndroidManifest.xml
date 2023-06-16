@@ -37,11 +37,11 @@
 
         <meta-data
             android:name="com.sdk.referral.RhKey"
-            android:value="d7a827ce7d2b6fbcdbfb35d769272dabfd97f753" />
+            android:value="aff8792c7bccffd9165639e8be281bc4c51e3a11" />
 
         <meta-data
             android:name="com.sdk.referral.uuid"
-            android:value="MFdea3239f91" />
+            android:value="MF6903b03e62" />
 
 
     </application>
