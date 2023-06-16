@@ -3,7 +3,6 @@ package com.sdk.referral.networking
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.sdk.referral.logger.Logger
 import com.sdk.referral.model.*
 import com.sdk.referral.utils.DeviceInfo
 import com.sdk.referral.utils.PrefHelper
@@ -49,14 +48,14 @@ class ReferralNetworkClient {
             override fun onFailure(call: Call, e: IOException) {
                 if (continuation.context.isActive) {
                     val errorResponse = ApiResponse<SubscriberData>(
-                        "error",
+                        "onFailure",
                         e.message,
                         "0",
                         null,
                         null,
                         0
                     )
-                    continuation.resumeWith(Result.failure(IOException(Gson().toJson(errorResponse))))
+                    continuation.resume(errorResponse)
                 }
             }
 
@@ -71,16 +70,16 @@ class ReferralNetworkClient {
                     if (response.isSuccessful) {
                         continuation.resume(parsedResponse)
                     } else {
-                        Logger().error(parsedResponse.message)
-                        val errorResponse = ApiResponse<SubscriberData>(
-                            "error",
-                            parsedResponse.message,
-                            parsedResponse.code,
-                            null,
-                            null,
-                            0
+                        continuation.resume(
+                            ApiResponse(
+                                "error",
+                                parsedResponse.message,
+                                parsedResponse.code,
+                                null,
+                                null,
+                                0
+                            )
                         )
-                        continuation.resume(errorResponse)
                     }
                 }
             }
