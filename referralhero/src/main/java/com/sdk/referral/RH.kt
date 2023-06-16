@@ -82,10 +82,9 @@ class RH(var context_: Context) {
         val mainCoroutineScope = CoroutineScope(Dispatchers.Main)
         try {
             mainCoroutineScope.launch {
-                try {
                     val response = referralNetworkClient.serverRequestGetAsync(
                         context_,
-                        "${RHUtil.readRhCampaignID(context_)}/subscribers/${prefHelper.rHSubscriberID}"
+                        "${prefHelper.rhCampaignID}/subscribers/${prefHelper.rHSubscriberID}"
                     )
                     if (response.status == "ok") {
                         registerSubscriberCallback?.onSuccessCallback(response)
@@ -93,9 +92,6 @@ class RH(var context_: Context) {
                         registerSubscriberCallback?.onFailureCallback(response)
                     }
 
-                } catch (exception: Exception) {
-                    logger?.error(exception.toString())
-                }
             }
         } catch (exception: Exception) {
             logger?.error(exception.toString())
@@ -115,7 +111,7 @@ class RH(var context_: Context) {
                 try {
                     val response = referralNetworkClient.serverRequestDeleteAsync(
                         context_,
-                        "${RHUtil.readRhCampaignID(context_)}/subscribers/${prefHelper.rHSubscriberID}"
+                        "${prefHelper.rhCampaignID}/subscribers/${prefHelper.rHSubscriberID}"
                     )
                     if (response.status == "ok") {
                         prefHelper.clearPrefOnBranchKeyChange()
@@ -149,7 +145,7 @@ class RH(var context_: Context) {
                 try {
                     val response = referralNetworkClient.serverRequestPatchAsync(
                         context_,
-                        "${RHUtil.readRhCampaignID(context_)}/subscribers/${prefHelper.rHSubscriberID}",
+                        "${prefHelper.rhCampaignID}/subscribers/${prefHelper.rHSubscriberID}",
                         referralParams
                     )
                     if (response.status == "ok") {
@@ -186,7 +182,7 @@ class RH(var context_: Context) {
                 try {
                     val response = referralNetworkClient.serverRequestCallBackAsync(
                         context_,
-                        "${RHUtil.readRhCampaignID(context_)}/subscribers/track_referral_conversion_event",
+                        "${prefHelper.rhCampaignID}/subscribers/track_referral_conversion_event",
                         referralParams
                     )
                     if (response.status == "ok") {
@@ -217,7 +213,7 @@ class RH(var context_: Context) {
                 try {
                     val response = referralNetworkClient.serverRequestCallBackAsync(
                         context_,
-                        "${RHUtil.readRhCampaignID(context_)}/subscribers/${prefHelper.rHSubscriberID}/click_capture",
+                        "${prefHelper.rhCampaignID}/subscribers/${prefHelper.rHSubscriberID}/click_capture",
                         referralParams
                     )
                     if (response.status == "ok") {
@@ -249,7 +245,7 @@ class RH(var context_: Context) {
                 try {
                     val response = referralNetworkClient.serverRequestCallBackAsync(
                         context_,
-                        "${RHUtil.readRhCampaignID(context_)}/subscribers/pending_referral",
+                        "${prefHelper.rhCampaignID}/subscribers/pending_referral",
                         referralParams
                     )
                     if (response.status == "ok") {
@@ -283,7 +279,7 @@ class RH(var context_: Context) {
                 try {
                     val response = referralNetworkClient.serverRequestCallBackAsync(
                         context_,
-                        "${RHUtil.readRhCampaignID(context_)}/subscribers/organic_track_referral",
+                        "${prefHelper.rhCampaignID}/subscribers/organic_track_referral",
                         referralParams
                     )
                     if (response.status == "ok") {
@@ -311,7 +307,7 @@ class RH(var context_: Context) {
                 try {
                     val response = referralNetworkClient.serverRequestGetReferrerAsync(
                         context_,
-                        "${RHUtil.readRhCampaignID(context_)}/subscribers/referrer",
+                        "${prefHelper.rhCampaignID}/subscribers/referrer",
                     )
                     if (response.status == "ok") {
                         registerSubscriberCallback?.onSuccessCallback(response)
@@ -342,7 +338,7 @@ class RH(var context_: Context) {
                 try {
                     val response = referralNetworkClient.serverRequestCallBackAsync(
                         context_,
-                        "${RHUtil.readRhCampaignID(context_)}/subscribers/${prefHelper.rHSubscriberID}/confirm",
+                        "${prefHelper.rhCampaignID}/subscribers/${prefHelper.rHSubscriberID}/confirm",
                         ReferralParams()
                     )
                     if (response.status == "ok") {
@@ -385,7 +381,7 @@ class RH(var context_: Context) {
                 try {
                     val response = referralNetworkClient.serverRequestGetMyReferralAsync(
                         context_,
-                        "${RHUtil.readRhCampaignID(context_)}/subscribers/${prefHelper.rHSubscriberID}/referrals_data"
+                        "${prefHelper.rhCampaignID}/subscribers/${prefHelper.rHSubscriberID}/referrals_data"
                     )
                     if (response.status == "ok") {
                         myReferralCallback?.onMyReferralSuccessCallback(response)
@@ -419,7 +415,7 @@ class RH(var context_: Context) {
             mainCoroutineScope.launch {
                 try {
                     val response = referralNetworkClient.serverRequestGetLeaderboardAsync(
-                        context_, "${RHUtil.readRhCampaignID(context_)}/leaderboard"
+                        context_, "${prefHelper.rhCampaignID}/leaderboard"
                     )
                     // Handle the response
                     if (response.status == "ok") {
@@ -444,7 +440,7 @@ class RH(var context_: Context) {
                 try {
                     val response = referralNetworkClient.serverRequestRewardAsync(
                         context_,
-                        "${RHUtil.readRhCampaignID(context_)}/subscribers/${prefHelper.rHSubscriberID}/rewards"
+                        "${prefHelper.rhCampaignID}/subscribers/${prefHelper.rHSubscriberID}/rewards"
                     )
                     if (response.status == "ok") {
                         rewardCallback?.onRewardSuccessCallback(response)
@@ -515,15 +511,15 @@ class RH(var context_: Context) {
             RHReferral_ = RH(context.applicationContext)
             if (TextUtils.isEmpty(RHaccessToken)) {
                 Logger().debug("Warning: Please enter your access_token in your project's Manifest file!")
-                RHReferral_!!.prefHelper.setRHAccessTokenKey(PrefHelper.NO_STRING_VALUE)
+                RHReferral_?.prefHelper?.setRHAccessTokenKey(PrefHelper.NO_STRING_VALUE)
             } else {
-                RHReferral_!!.prefHelper.setRHAccessTokenKey(RHaccessToken)
+                RHReferral_?.prefHelper?.setRHAccessTokenKey(RHaccessToken)
             }
             if (TextUtils.isEmpty(RHuuid)) {
                 Logger().debug("Warning: Please enter your Campaign  uuid in your project's Manifest file!")
-                RHReferral_!!.prefHelper.setRHCampaignID(PrefHelper.NO_STRING_VALUE)
+                RHReferral_?.prefHelper?.setRHCampaignID(PrefHelper.NO_STRING_VALUE)
             } else {
-                RHReferral_!!.prefHelper.setRHCampaignID(RHuuid)
+                RHReferral_?.prefHelper?.setRHCampaignID(RHuuid)
             }
             return RHReferral_
         }

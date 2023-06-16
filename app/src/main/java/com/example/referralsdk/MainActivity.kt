@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
                 referralParams.domain = "https://wongazoma.aistechnolabs.info/action"
                 referralParams.name = "Jayden"
                 referralParams.referrer = ""
-                referralParams.uuid = "MFdea3239f91"
+                referralParams.uuid = "MFc19240a6e7"
                 // referralParams.ip_address = rh?.deviceInfo?.getIpAddress()
                 referralParams.device = rh?.deviceInfo?.getDeviceModel()
                 referralParams.os_type = rh?.deviceInfo?.getOperatingSystem()
@@ -91,7 +91,22 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
                 rh?.formSubmit(this, referralParams)
                 rh?.prefHelper?.rHReferralLink
             }
-            R.id.btnGet -> RH.instance?.getSubscriber(this)
+            R.id.btnGet -> {
+
+                rh?.getSubscriber(object : RH.RHReferralCallBackListener {
+                    override fun onSuccessCallback(response: ApiResponse<SubscriberData>?) {
+                        Log.e("Code", response?.code.toString());
+                        Log.e("Code", response?.data?.email.toString());
+                        Log.e("Code", response?.data?.code.toString());
+                    }
+
+                    override fun onFailureCallback(response: ApiResponse<SubscriberData>?) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
+
+            }
             R.id.btnDelete -> RH.instance?.deleteSubscriber(this)
             R.id.btnUpdate -> {
                 referralParams.name = "AndiDevOps"
