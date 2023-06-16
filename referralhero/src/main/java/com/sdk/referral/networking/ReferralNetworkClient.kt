@@ -61,6 +61,7 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseString = response.body?.string()
+                com.sdk.referral.logger.Logger().debug("API", responseString)
                 val parsedResponse: ApiResponse<SubscriberData> = Gson().fromJson(
                     responseString,
                     object : TypeToken<ApiResponse<SubscriberData>>() {}.type
@@ -131,6 +132,8 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseString = response.body?.string()
+                com.sdk.referral.logger.Logger().debug("API", responseString)
+                com.sdk.referral.logger.Logger().debug("API", responseString)
                 val parsedResponse: ApiResponse<SubscriberData> = Gson().fromJson(
                     responseString,
                     object : TypeToken<ApiResponse<SubscriberData>>() {}.type
@@ -198,6 +201,8 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseString = response.body?.string()
+                com.sdk.referral.logger.Logger().debug("API", responseString)
+                com.sdk.referral.logger.Logger().debug("API", responseString)
                 val parsedResponse: ApiResponse<SubscriberData> = Gson().fromJson(
                     responseString,
                     object : TypeToken<ApiResponse<SubscriberData>>() {}.type
@@ -267,6 +272,8 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseString = response.body?.string()
+                com.sdk.referral.logger.Logger().debug("API", responseString)
+                com.sdk.referral.logger.Logger().debug("API", responseString)
                 val parsedResponse: ApiResponse<SubscriberData> = Gson().fromJson(
                     responseString,
                     object : TypeToken<ApiResponse<SubscriberData>>() {}.type
@@ -332,6 +339,7 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseString = response.body?.string()
+                com.sdk.referral.logger.Logger().debug("API", responseString)
                 val parsedResponse: ApiResponse<ListSubscriberData> = Gson().fromJson(
                     responseString,
                     object : TypeToken<ApiResponse<ListSubscriberData>>() {}.type
@@ -387,6 +395,7 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseString = response.body?.string()
+                com.sdk.referral.logger.Logger().debug("API", responseString)
                 val parsedResponse: ApiResponse<RankingDataContent> = Gson().fromJson(
                     responseString,
                     object : TypeToken<ApiResponse<RankingDataContent>>() {}.type
@@ -432,6 +441,7 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseString = response.body?.string()
+                com.sdk.referral.logger.Logger().debug("API", responseString)
                 val parsedResponse: ApiResponse<ListSubscriberData> = Gson().fromJson(
                     responseString,
                     object : TypeToken<ApiResponse<ListSubscriberData>>() {}.type
@@ -489,6 +499,7 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseString = response.body?.string()
+                com.sdk.referral.logger.Logger().debug("API", responseString)
                 val parsedResponse: ApiResponse<SubscriberData> = Gson().fromJson(
                     responseString,
                     object : TypeToken<ApiResponse<SubscriberData>>() {}.type
