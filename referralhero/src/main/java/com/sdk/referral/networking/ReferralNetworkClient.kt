@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken
 import com.sdk.referral.model.*
 import com.sdk.referral.utils.DeviceInfo
 import com.sdk.referral.utils.PrefHelper
-import com.sdk.referral.utils.RHUtil
 import kotlinx.coroutines.isActive
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
@@ -36,7 +35,8 @@ class ReferralNetworkClient {
         val urlBuilder = (PrefHelper.aPIBaseUrl + endpoint).toHttpUrlOrNull()?.newBuilder()
         val url = urlBuilder?.build()?.toString()
         val requestBuilder =
-            Request.Builder().url(url!!).addHeader("Authorization", RHUtil.readRhKey(context))
+            Request.Builder().url(url!!)
+                .addHeader("Authorization", PrefHelper(context).rhAccessTokenKey!!)
                 .addHeader("Accept", "application/vnd.referralhero.v1")
                 .addHeader("Content-Type", "application/json").get()
 
@@ -108,7 +108,8 @@ class ReferralNetworkClient {
         val url = urlBuilder?.build()?.toString()
 
         val requestBuilder =
-            Request.Builder().url(url!!).addHeader("Authorization", RHUtil.readRhKey(context))
+            Request.Builder().url(url!!)
+                .addHeader("Authorization", PrefHelper(context).rhAccessTokenKey!!)
                 .addHeader("Accept", "application/vnd.referralhero.v1").post(requestBody)
 
         val request = requestBuilder.build()
@@ -176,7 +177,8 @@ class ReferralNetworkClient {
         val url = urlBuilder?.build()?.toString()
 
         val requestBuilder =
-            Request.Builder().url(url!!).addHeader("Authorization", RHUtil.readRhKey(context))
+            Request.Builder().url(url!!)
+                .addHeader("Authorization", PrefHelper(context).rhAccessTokenKey!!)
                 .addHeader("Accept", "application/vnd.referralhero.v1")
                 .addHeader("Content-Type", "application/json").delete()
 
@@ -248,7 +250,8 @@ class ReferralNetworkClient {
         val url = urlBuilder?.build()?.toString()
 
         val requestBuilder =
-            Request.Builder().url(url!!).addHeader("Authorization", RHUtil.readRhKey(context))
+            Request.Builder().url(url!!)
+                .addHeader("Authorization", PrefHelper(context).rhAccessTokenKey!!)
                 .addHeader("Accept", "application/vnd.referralhero.v1").patch(requestBody)
 
         val request = requestBuilder.build()
@@ -314,7 +317,8 @@ class ReferralNetworkClient {
         val urlBuilder = (PrefHelper.aPIBaseUrl + endpoint).toHttpUrlOrNull()?.newBuilder()
         val url = urlBuilder?.build()?.toString()
         val requestBuilder =
-            Request.Builder().url(url!!).addHeader("Authorization", RHUtil.readRhKey(context))
+            Request.Builder().url(url!!)
+                .addHeader("Authorization", PrefHelper(context).rhAccessTokenKey!!)
                 .addHeader("Accept", "application/vnd.referralhero.v1")
                 .addHeader("Content-Type", "application/json").get()
 
@@ -380,7 +384,8 @@ class ReferralNetworkClient {
         val urlBuilder = (PrefHelper.aPIBaseUrl + endpoint).toHttpUrlOrNull()?.newBuilder()
         val url = urlBuilder?.build()?.toString()
         val requestBuilder =
-            Request.Builder().url(url!!).addHeader("Authorization", RHUtil.readRhKey(context))
+            Request.Builder().url(url!!)
+                .addHeader("Authorization", PrefHelper(context).rhAccessTokenKey!!)
                 .addHeader("Accept", "application/vnd.referralhero.v1")
                 .addHeader("Content-Type", "application/json").get()
 
@@ -426,7 +431,8 @@ class ReferralNetworkClient {
         val urlBuilder = (PrefHelper.aPIBaseUrl + endpoint).toHttpUrlOrNull()?.newBuilder()
         val url = urlBuilder?.build()?.toString()
         val requestBuilder =
-            Request.Builder().url(url!!).addHeader("Authorization", RHUtil.readRhKey(context))
+            Request.Builder().url(url!!)
+                .addHeader("Authorization", PrefHelper(context).rhAccessTokenKey!!)
                 .addHeader("Accept", "application/vnd.referralhero.v1")
                 .addHeader("Content-Type", "application/json").get()
 
@@ -474,7 +480,8 @@ class ReferralNetworkClient {
         urlBuilder?.addQueryParameter("screen_size", DeviceInfo(context).getDeviceScreenSize())
         val url = urlBuilder?.build()?.toString()
         val requestBuilder =
-            Request.Builder().url(url!!).addHeader("Authorization", RHUtil.readRhKey(context))
+            Request.Builder().url(url!!)
+                .addHeader("Authorization", PrefHelper(context).rhAccessTokenKey!!)
                 .addHeader("Accept", "application/vnd.referralhero.v1")
                 .addHeader("Content-Type", "application/json").get()
 

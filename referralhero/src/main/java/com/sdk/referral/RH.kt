@@ -7,7 +7,6 @@ import com.sdk.referral.model.*
 import com.sdk.referral.networking.ReferralNetworkClient
 import com.sdk.referral.utils.DeviceInfo
 import com.sdk.referral.utils.PrefHelper
-import com.sdk.referral.utils.RHUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -530,28 +529,5 @@ class RH(var context_: Context) {
             return RHReferral_
         }
 
-        /**
-         *
-         * Singleton method to return the pre-initialised, or newly initialise and return, a singleton
-         * object of the type [RH].
-         *
-         * Use this whenever you need to call a method directly on the [RH] object.
-         *
-         * @param context A [Context] from which this call was made.
-         * @return An initialised [RH] object, either fetched from a pre-initialised
-         * instance within the singleton class, or a newly instantiated object where
-         * one was not already requested during the current app lifecycle.
-         */
-        @JvmStatic
-        @Synchronized
-        fun getAutoInstance(context: Context): RH? {
-            this.RHReferral_?.context_ = context
-            Logger().debug("Warning, attempted to getAutoInstance RH SDK singleton!")
-            if (RHReferral_ == null) {
-                RHReferral_ =
-                    initRHSDK(context, RHUtil.readRhKey(context), RHUtil.readRhCampaignID(context))
-            }
-            return RHReferral_
-        }
     }
 }
