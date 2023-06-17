@@ -134,6 +134,10 @@ class RH(var context_: Context) {
 
     }
 
+    fun clearSDKData() {
+        prefHelper.clearPrefOnBranchKeyChange()
+    }
+
     /***
      * This method will only be used when user want Update a subscriber.
      * it is only Update a single subscriber.
@@ -314,6 +318,9 @@ class RH(var context_: Context) {
                         "${prefHelper.rhCampaignID}/subscribers/referrer",
                     )
                     if (response.status == "ok") {
+                        response.data?.let {
+                            prefHelper.rHSubscriberID = it.id
+                        }
                         registerSubscriberCallback?.onSuccessCallback(response)
                     } else {
                         registerSubscriberCallback?.onFailureCallback(response)
@@ -362,10 +369,6 @@ class RH(var context_: Context) {
     }
 
 
-
-    private fun handlerewardApiResponse(response: ApiResponse<ListSubscriberData>, ordinal: Int) {
-
-    }
 
 
     /*
