@@ -510,18 +510,18 @@ class RH(var context_: Context) {
         @Synchronized
         fun initRHSDK(context: Context, ApiToken: String?, RHuuid: String?): RH? {
             if (RHReferral_ != null) {
-                Logger().debug("Warning, attempted to reinitialize RH SDK singleton!")
+                Logger().warn("Warning, attempted to reinitialize RH SDK singleton!")
                 return RHReferral_
             }
             RHReferral_ = RH(context.applicationContext)
             if (TextUtils.isEmpty(ApiToken)) {
-                Logger().debug("Warning: Please enter your access_token in your project's Manifest file!")
+                Logger().warn("Warning: Please enter your access_token in your project's Manifest file!")
                 RHReferral_?.prefHelper?.setRHAccessTokenKey(PrefHelper.NO_STRING_VALUE)
             } else {
                 RHReferral_?.prefHelper?.setRHAccessTokenKey(ApiToken)
             }
             if (TextUtils.isEmpty(RHuuid)) {
-                Logger().debug("Warning: Please enter your Campaign  uuid in your project's Manifest file!")
+                Logger().warn("Warning: Please enter your Campaign  uuid in your project's Manifest file!")
                 RHReferral_?.prefHelper?.setRHCampaignID(PrefHelper.NO_STRING_VALUE)
             } else {
                 RHReferral_?.prefHelper?.setRHCampaignID(RHuuid)
