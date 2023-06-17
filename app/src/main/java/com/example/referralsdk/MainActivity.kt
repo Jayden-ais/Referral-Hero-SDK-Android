@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
                 referralParams.domain = "https://wongazoma.aistechnolabs.info/action"
                 referralParams.name = "Jayden"
                 referralParams.referrer = ""
-                referralParams.uuid = "MFc19240a6e7"
+                referralParams.uuid = "MF8b0d590f9d"
                 // referralParams.ip_address = rh?.deviceInfo?.getIpAddress()
                 referralParams.device = rh?.deviceInfo?.getDeviceModel()
                 referralParams.os_type = rh?.deviceInfo?.getOperatingSystem()
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
                 rh?.updateSubscriber(this, referralParams)
             }
             R.id.btnTrack -> {
-                referralParams.email = "Jayden@gmail.com"
+                referralParams.email = "jayden@aistechnolabs.org"
                 referralParams.name = "AndiDev"
                 rh?.trackReferral(this, referralParams)
             }
@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
             R.id.btnGetCampaign -> RH.instance?.getLeaderboard(this)
             R.id.btnConfirm -> RH.instance?.confirmReferral(this)
             R.id.btnPending -> {
-                referralParams.email = "Jayden@gmail.com"
+                referralParams.email = "jayden@aistechnolabs.org"
                 referralParams.name = "AndiDev"
                 referralParams.ip_address = DeviceInfo(this).getIpAddress()
                 referralParams.screen_size = DeviceInfo(this).getDeviceScreenSize()
@@ -138,7 +138,7 @@ class MainActivity : AppCompatActivity(), RH.RHReferralCallBackListener, View.On
                 rh?.pendingReferral(this, referralParams)
             }
             R.id.btnOrgTrack -> {
-                referralParams.email = "Jayden@gmail.com"
+                referralParams.email = "jayden@aistechnolabs.org"
                 rh?.organicTrackReferral(this, referralParams)
             }
             R.id.btnReward -> {

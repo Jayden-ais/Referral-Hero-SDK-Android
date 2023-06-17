@@ -82,6 +82,7 @@ class RH(var context_: Context) {
         val mainCoroutineScope = CoroutineScope(Dispatchers.Main)
         try {
             mainCoroutineScope.launch {
+                try {
                     val response = referralNetworkClient.serverRequestGetAsync(
                         context_,
                         "${prefHelper.rhCampaignID}/subscribers/${prefHelper.rHSubscriberID}"
@@ -91,6 +92,10 @@ class RH(var context_: Context) {
                     } else {
                         registerSubscriberCallback?.onFailureCallback(response)
                     }
+
+                } catch (exception: Exception) {
+                    logger?.error(exception.toString())
+                }
 
             }
         } catch (exception: Exception) {
@@ -502,18 +507,19 @@ class RH(var context_: Context) {
                 return RHReferral_
             }
 
+        @JvmStatic
         @Synchronized
-        private fun initRHSDK(context: Context, RHaccessToken: String?, RHuuid: String?): RH? {
+        fun initRHSDK(context: Context, ApiToken: String?, RHuuid: String?): RH? {
             if (RHReferral_ != null) {
                 Logger().debug("Warning, attempted to reinitialize RH SDK singleton!")
                 return RHReferral_
             }
             RHReferral_ = RH(context.applicationContext)
-            if (TextUtils.isEmpty(RHaccessToken)) {
+            if (TextUtils.isEmpty(ApiToken)) {
                 Logger().debug("Warning: Please enter your access_token in your project's Manifest file!")
                 RHReferral_?.prefHelper?.setRHAccessTokenKey(PrefHelper.NO_STRING_VALUE)
             } else {
-                RHReferral_?.prefHelper?.setRHAccessTokenKey(RHaccessToken)
+                RHReferral_?.prefHelper?.setRHAccessTokenKey(ApiToken)
             }
             if (TextUtils.isEmpty(RHuuid)) {
                 Logger().debug("Warning: Please enter your Campaign  uuid in your project's Manifest file!")
