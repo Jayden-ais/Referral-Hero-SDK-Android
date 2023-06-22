@@ -42,6 +42,13 @@ class RH(var context_: Context) {
         registerSubscriberCallback = callback
         val mainCoroutineScope = CoroutineScope(Dispatchers.Main)
 
+        if (prefHelper.appStoreReferrer?.trim()?.isNotEmpty() == true) {
+            if (!prefHelper.appStoreReferrer.toString()
+                    .equals("NO_STRING_VALUE", true)
+            ) referralParams.referrer = prefHelper.appStoreReferrer
+        }
+
+
         try {
             mainCoroutineScope.launch {
                 try {
@@ -51,7 +58,7 @@ class RH(var context_: Context) {
                     if (response.status == "ok") {
                         response.data?.let {
                             prefHelper.rHReferralLink = it.referral_link
-                            prefHelper.appStoreReferrer = it.universal_link
+                            prefHelper.rHReferralLink = it.universal_link
                             prefHelper.rHSubscriberID = it.id
                         }
                         registerSubscriberCallback?.onSuccessCallback(response)
@@ -318,9 +325,9 @@ class RH(var context_: Context) {
                         "${prefHelper.rhCampaignID}/subscribers/referrer",
                     )
                     if (response.status == "ok") {
-                      /*  response.data?.let {
-                            prefHelper.rHSubscriberID = it.id
-                        }*/
+                        /*  response.data?.let {
+                              prefHelper.rHSubscriberID = it.id
+                          }*/
                         registerSubscriberCallback?.onSuccessCallback(response)
                     } else {
                         registerSubscriberCallback?.onFailureCallback(response)
@@ -367,8 +374,6 @@ class RH(var context_: Context) {
         }
 
     }
-
-
 
 
     /*
