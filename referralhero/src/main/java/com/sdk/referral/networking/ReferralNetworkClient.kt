@@ -54,7 +54,7 @@ class ReferralNetworkClient {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                if (response.code == 200) {
+                if (response.code == 200 || response.code == 403) {
                     val responseString = response.body?.string()
                     com.sdk.referral.logger.Logger().debug("API", responseString)
                     val parsedResponse: ApiResponse<SubscriberData> = Gson().fromJson(
@@ -132,7 +132,7 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
 
-                if (response.code == 200) {
+                if (response.code == 200 || response.code == 403) {
                     val responseString = response.body?.string()
                     com.sdk.referral.logger.Logger().debug("API", responseString)
                     val parsedResponse: ApiResponse<SubscriberData> = Gson().fromJson(
@@ -200,7 +200,7 @@ class ReferralNetworkClient {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                if (response.code == 200) {
+                if (response.code == 200 || response.code == 403) {
                     val responseString = response.body?.string()
                     com.sdk.referral.logger.Logger().debug("API", responseString)
                     val parsedResponse: ApiResponse<SubscriberData> = Gson().fromJson(
@@ -272,7 +272,7 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
 
-                if (response.code == 200) {
+                if (response.code == 200 || response.code == 403) {
                     val responseString = response.body?.string()
                     com.sdk.referral.logger.Logger().debug("API", responseString)
                     com.sdk.referral.logger.Logger().debug("API", responseString)
@@ -343,7 +343,7 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
 
-                if (response.code == 200) {
+                if (response.code == 200 || response.code == 403) {
                     val responseString = response.body?.string()
                     com.sdk.referral.logger.Logger().debug("API", responseString)
                     val parsedResponse: ApiResponse<ListSubscriberData> = Gson().fromJson(
@@ -408,7 +408,7 @@ class ReferralNetworkClient {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                if (response.code == 200) {
+                if (response.code == 200 || response.code == 403) {
                     val responseString = response.body?.string()
                     com.sdk.referral.logger.Logger().debug("API", responseString)
                     val parsedResponse: ApiResponse<RankingDataContent> = Gson().fromJson(
@@ -463,7 +463,7 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseString = response.body?.string()
-                if (response.code == 200) {
+                if (response.code == 200 || response.code == 403) {
                     val parsedResponse: ApiResponse<ListSubscriberData> = Gson().fromJson(
                         responseString,
                         object : TypeToken<ApiResponse<ListSubscriberData>>() {}.type
@@ -522,7 +522,7 @@ class ReferralNetworkClient {
 
             override fun onResponse(call: Call, response: Response) {
 
-                if (response.code == 200) {
+                if (response.code == 200 || response.code == 403) {
                     val responseString = response.body?.string()
                     com.sdk.referral.logger.Logger().debug("API", responseString)
                     val parsedResponse: ApiResponse<SubscriberData> = Gson().fromJson(
