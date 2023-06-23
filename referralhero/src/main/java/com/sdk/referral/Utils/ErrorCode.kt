@@ -30,8 +30,8 @@ enum class ErrorCode(val code: Int, val message: String) {
     PERMANENT_REDIRECT(308, "Permanent Redirect"),
 
     // Client error responses (4xx)
-    BAD_REQUEST(400, "Bad Request"),
-    UNAUTHORIZED(401, "Unauthorized"),
+    BAD_REQUEST(400, "The api_token|uuid|subscriber_id parameter is missing or blank"),
+    UNAUTHORIZED(401, "The provided \"uuid\" is invalid or does not exist"),
     PAYMENT_REQUIRED(402, "Payment Required"),
     FORBIDDEN(403, "The provided subscriber does not exist"),
     NOT_FOUND(404, "Not Found"),
