@@ -83,8 +83,11 @@ class PrefHelper(context: Context) {
             setString(KEY_RH_PLAYSTORE_LINK, RHPlayStoreLink)
         }
 
-    val rhAccessTokenKey: String?
+    var rhAccessTokenKey: String?
         get() = getString(KEY_RH_ACCESS_TOKEN)
+        set(value) {
+            setString(KEY_RH_ACCESS_TOKEN, value)
+        }
 
 
     /**

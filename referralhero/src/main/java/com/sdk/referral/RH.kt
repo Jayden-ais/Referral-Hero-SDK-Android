@@ -7,6 +7,7 @@ import com.sdk.referral.model.*
 import com.sdk.referral.networking.ReferralNetworkClient
 import com.sdk.referral.utils.DeviceInfo
 import com.sdk.referral.utils.PrefHelper
+import com.sdk.referral.utils.RHUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,7 +48,7 @@ class RH(var context_: Context) {
                     .equals("NO_STRING_VALUE", true)
             ) referralParams.referrer = prefHelper.appStoreReferrer
         }
-
+        prefHelper.rhAccessTokenKey = RHUtil.readRhKey(context_)
 
         try {
             mainCoroutineScope.launch {
@@ -524,7 +525,7 @@ class RH(var context_: Context) {
             RHReferral_ = RH(context.applicationContext)
             if (TextUtils.isEmpty(ApiToken)) {
                 Logger().warn("Warning: Please enter your access_token in your project's Manifest file!")
-                RHReferral_?.prefHelper?.setRHAccessTokenKey(PrefHelper.NO_STRING_VALUE)
+                RHReferral_?.prefHelper?.setRHAccessTokenKey(RHUtil.readRhKey(context))
             } else {
                 RHReferral_?.prefHelper?.setRHAccessTokenKey(ApiToken)
             }
