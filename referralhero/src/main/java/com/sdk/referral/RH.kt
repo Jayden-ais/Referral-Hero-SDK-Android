@@ -2,6 +2,7 @@ package com.sdk.referral
 
 import android.content.Context
 import android.text.TextUtils
+import android.util.Log
 import com.sdk.referral.logger.Logger
 import com.sdk.referral.model.*
 import com.sdk.referral.networking.ReferralNetworkClient
@@ -31,6 +32,7 @@ class RH(var context_: Context) {
         prefHelper = PrefHelper(context_)
         logger = Logger()
         referralNetworkClient = ReferralNetworkClient()
+
     }
 
     /**
@@ -48,7 +50,11 @@ class RH(var context_: Context) {
                     .equals("NO_STRING_VALUE", true)
             ) referralParams.referrer = prefHelper.appStoreReferrer
         }
-        prefHelper.rhAccessTokenKey = RHUtil.readRhKey(context_)
+
+
+        Log.e("API Token", prefHelper.rhAccessTokenKey.toString());
+        Log.e("API Token", prefHelper.rhCampaignID.toString());
+        Log.e("API Token", prefHelper.rHSubscriberID.toString());
 
         try {
             mainCoroutineScope.launch {
@@ -511,7 +517,19 @@ class RH(var context_: Context) {
             get() {
                 if (RHReferral_ == null) {
                     PrefHelper.Debug("RH instance is not created yet. Make sure you call getAutoInstance(Context).")
+                } else {
+                    RHReferral_?.prefHelper?.rhAccessTokenKey = RHReferral_?.context_?.let {
+                        RHUtil.readRhKey(
+                            it
+                        )
+                    }
+                    RHReferral_?.prefHelper?.rhCampaignID = RHReferral_?.context_?.let {
+                        RHUtil.readRhCampaignID(
+                            it
+                        )
+                    }
                 }
+
                 return RHReferral_
             }
 
