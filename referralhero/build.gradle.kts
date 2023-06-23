@@ -19,6 +19,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            isJniDebuggable = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
@@ -56,7 +57,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.github.Jayden-ais"
             artifactId = "Referral-Hero-SDK-Android"
-            version = "1.0.2"
+            version = "1.0.3"
             afterEvaluate {
                 from(components["release"])
             }
