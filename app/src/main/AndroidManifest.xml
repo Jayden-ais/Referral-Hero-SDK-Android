@@ -1,48 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name=".Application.RHApp"
+        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ReferralHeroJ"
-        tools:targetApi="31">
+        android:theme="@style/Theme.ReferralSdk">
         <activity
-            android:name=".activity.HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.example.referralsdk.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <meta-data
-            android:name="com.sdk.referral.token"
+            android:name="com.sdk.referral.RhKey"
             android:value="00f9e163fd6d54b18631fd255a91ce06b959bd5c" />
 
         <meta-data
             android:name="com.sdk.referral.uuid"
             android:value="MF4345c63888" />
+
 
     </application>
 
