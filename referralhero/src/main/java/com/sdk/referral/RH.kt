@@ -2,7 +2,6 @@ package com.sdk.referral
 
 import android.content.Context
 import android.text.TextUtils
-import android.util.Log
 import com.sdk.referral.logger.Logger
 import com.sdk.referral.model.*
 import com.sdk.referral.networking.ReferralNetworkClient
@@ -50,12 +49,6 @@ class RH(var context_: Context) {
                     .equals("NO_STRING_VALUE", true)
             ) referralParams.referrer = prefHelper.appStoreReferrer
         }
-
-
-        Log.e("API Token", prefHelper.rhAccessTokenKey.toString());
-        Log.e("API Token", prefHelper.rhCampaignID.toString());
-        Log.e("API Token", prefHelper.rHSubscriberID.toString());
-
         try {
             mainCoroutineScope.launch {
                 try {

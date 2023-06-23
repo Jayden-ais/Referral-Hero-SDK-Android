@@ -63,8 +63,11 @@ class PrefHelper(context: Context) {
         setString(KEY_RH_PLAYSTORE_LINK, key)
     }
 
-    val rhCampaignID: String?
+    var rhCampaignID: String?
         get() = getString(KEY_RH_CAMPAIGN_ID)
+        set(value) {
+            setString(KEY_RH_CAMPAIGN_ID, value)
+        }
 
     /**
      * Set the given Referral Link  to preference.
