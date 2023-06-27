@@ -11,6 +11,7 @@ data class Reward(
     val id: Long,
     val name: String,
     val status: String,
+    val image_url: String?,
     val referrals: Any?,
     val createdAt: Long,
     val signupType: String,
