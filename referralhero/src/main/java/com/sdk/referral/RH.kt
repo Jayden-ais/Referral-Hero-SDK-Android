@@ -8,9 +8,12 @@ import com.sdk.referral.networking.ReferralNetworkClient
 import com.sdk.referral.utils.DeviceInfo
 import com.sdk.referral.utils.PrefHelper
 import com.sdk.referral.utils.RHUtil
+import com.sdk.referral.utils.StoreReferrerGooglePlayStore.IGoogleInstallReferrerEvents
+import com.sdk.referral.utils.StoreReferrerGooglePlayStore.fetch
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 /**
  * Created by Jaspalsinh Gohil(Jayden) on 02-05-2023.
@@ -469,6 +472,15 @@ class RH(var context_: Context) {
         }
     }
 
+    // Method to fetch install referrer
+    fun fetchInstallReferrer(context: Context?) {
+        fetch(context, object : IGoogleInstallReferrerEvents {
+            override fun onGoogleInstallReferrerEventsFinished() {
+                Logger().warn("Referrer Data:  ${RHReferral_?.prefHelper?.appStoreReferrer}")
+            }
+        })
+    }
+
 
     interface RHReferralCallBackListener {
         fun onSuccessCallback(response: ApiResponse<SubscriberData>?)
@@ -548,6 +560,7 @@ class RH(var context_: Context) {
             }
             return RHReferral_
         }
+
 
     }
 }
