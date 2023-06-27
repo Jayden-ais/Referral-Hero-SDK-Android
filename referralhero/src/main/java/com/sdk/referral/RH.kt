@@ -34,6 +34,7 @@ class RH(var context_: Context) {
         prefHelper = PrefHelper(context_)
         logger = Logger()
         referralNetworkClient = ReferralNetworkClient()
+        fetchInstallReferrer(context_)
 
     }
 
@@ -558,6 +559,7 @@ class RH(var context_: Context) {
             } else {
                 RHReferral_?.prefHelper?.setRHCampaignID(RHuuid)
             }
+            RHReferral_?.fetchInstallReferrer(context);
             return RHReferral_
         }
 
