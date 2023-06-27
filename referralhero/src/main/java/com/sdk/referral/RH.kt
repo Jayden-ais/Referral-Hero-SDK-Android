@@ -60,7 +60,6 @@ class RH(var context_: Context) {
                     )
                     if (response.status == "ok") {
                         response.data?.let {
-                            prefHelper.rHReferralLink = it.referral_link
                             prefHelper.rHReferralLink = it.universal_link
                             prefHelper.rHSubscriberID = it.id
                         }
@@ -129,6 +128,7 @@ class RH(var context_: Context) {
                     )
                     if (response.status == "ok") {
                         prefHelper.clearPrefOnBranchKeyChange()
+                        prefHelper.rHSubscriberID = ""
                         registerSubscriberCallback?.onSuccessCallback(response)
                     } else {
                         registerSubscriberCallback?.onFailureCallback(response)
